@@ -7,6 +7,25 @@ import s from "./Home.module.css";
 export class Home extends React.Component {
   static contextType = AppContext;
 
+  renderCard = () => {
+    return this.context.products.length > 0 ? (
+      <div className={s["wrapper-card"]}>
+        {this.context.products.map(el => (
+          <Card
+            key={el.id}
+            name={el.name}
+            price={el.price}
+            url={el.url}
+            id={el.id}
+            isAdmin={false}
+          />
+        ))}
+      </div>
+    ) : (
+      <div className="h3">Is empty</div>
+    );
+  };
+
   render() {
     return (
       <div className={s.wrapper}>
@@ -16,18 +35,7 @@ export class Home extends React.Component {
             Admin
           </button>
         </Link>
-        <div className={s["wrapper-card"]}>
-          {this.context.products.map(el => (
-            <Card
-              key={el.id}
-              name={el.name}
-              price={el.price}
-              url={el.url}
-              id={el.id}
-              isAdmin={false}
-            />
-          ))}
-        </div>
+        {this.renderCard()}
       </div>
     );
   }

@@ -10,3 +10,13 @@ body {
   color: #757575;
   background-color: lightgrey;
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+a:hover{
+  text-decoration: none;
+}

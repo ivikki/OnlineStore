@@ -1,0 +1,38 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: #67CEDE;
+}
+
+.modal {
+    width: 50%;
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    position: relative;
+}
+
+.buttons{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.buttons .button{
+    width: 100px;
+    display: block;
+}
+
+.buttons .button:first-child{
+    margin-right: 20px;
+}
+
+label{
+    margin: 10px;
+}
