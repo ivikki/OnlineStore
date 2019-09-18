@@ -7,7 +7,6 @@ export class EditCard extends React.Component {
   state = {};
   static contextType = AppContext;
 
-  refId = React.createRef();
   refName = React.createRef();
   refPrice = React.createRef();
   refQuantity = React.createRef();
@@ -16,58 +15,55 @@ export class EditCard extends React.Component {
 
   componentDidMount() {
     const id = parseInt(this.props.match.params.id);
-    const products = this.context.products;
-    for (let i = 0; i < products.length; i++) {
-      var product = {};
-      if (products[i].id === id) {
-        product = products[i];
-        return product;
-      }
-    }
-    console.log(product);
-    // const product = products.find(p => p.id === id);
-    // this.setState({
-    //   id: product.id,
-    //   name: product.name,
-    //   price: product.price,
-    //   url: product.url,
-    //   quantity: product.quantity,
-    //   status: product.status
-    // });
+    let product = this.context.products.find(el => el.id === id);
+    this.setState({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      url: product.url,
+      quantity: product.quantity,
+      status: product.status
+    });
   }
 
-  handleClick = () => {
+  editClick = () => {
     let value = {
-      id: this.refId.current.value,
+      id: this.state.id,
       name: this.refName.current.value,
       price: this.refPrice.current.value,
       quantity: this.refQuantity.current.value,
       url: this.refUrl.current.value,
       status: this.refStock.current.value
     };
-    this.context.addCard(value);
+    this.context.editCard(value);
+  };
+
+  changeValue = () => {
+    this.setState({
+      name: this.refName.current.value,
+      price: this.refPrice.current.value,
+      url: this.refUrl.current.value,
+      quantity: this.refQuantity.current.value,
+      status: this.refStock.current.value
+    });
   };
 
   render() {
     return (
       <div className={s.wrapper}>
         <div className={s.modal}>
-          <h2 className="text-center">Add Product</h2>
+          <h2 className="text-center">Edit Product</h2>
           <form>
-            <label>Id Product:</label>
-            <input
-              className="form-control"
-              name="id"
-              type="number"
-              ref={this.refId}
-              value={this.state.id}
-            />
+            <label>
+              <mark>id: {this.state.id}</mark>
+            </label>
             <label>Name Product:</label>
             <input
               className="form-control"
               type="text"
               ref={this.refName}
               value={this.state.name}
+              onChange={this.changeValue}
             />
             <label>Price Product:</label>
             <input
@@ -75,6 +71,7 @@ export class EditCard extends React.Component {
               type="number"
               ref={this.refPrice}
               value={this.state.price}
+              onChange={this.changeValue}
             />
             <label>Quantity Product:</label>
             <input
@@ -82,6 +79,7 @@ export class EditCard extends React.Component {
               type="number"
               ref={this.refQuantity}
               value={this.state.quantity}
+              onChange={this.changeValue}
             />
             <label>Url Image Product:</label>
             <input
@@ -89,8 +87,9 @@ export class EditCard extends React.Component {
               type="text"
               ref={this.refUrl}
               value={this.state.url}
+              onChange={this.changeValue}
             />
-            <label>Status Product:</label>
+            <label className={s.status}>Status Product:</label>
             <select ref={this.refStock}>
               <option>in Stock</option>
               <option>NOT in Stock</option>
@@ -99,8 +98,8 @@ export class EditCard extends React.Component {
           <div className={s.buttons}>
             <Link to={"/admin"}>
               <button
-                className={"btn btn-primary " + s.button}
-                onClick={this.handleClick}
+                className={"btn btn-success " + s.button}
+                onClick={this.editClick}
               >
                 Save
               </button>

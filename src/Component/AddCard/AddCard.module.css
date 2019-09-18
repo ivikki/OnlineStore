@@ -33,6 +33,17 @@
     margin-right: 20px;
 }
 
-label{
-    margin: 10px;
+.modal h2{
+    margin-bottom: 20px;
+}
+
+.modal label{
+    margin: 10px 5px;
+    display: block;
+    font-weight: bold;
+}
+
+.modal .status{
+    display: inline-block;
+    margin: 20px 10px 20px 5px;
 }

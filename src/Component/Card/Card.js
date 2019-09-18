@@ -15,19 +15,19 @@ export class Card extends React.Component {
   };
 
   removeCard = () => {
-    this.context.removeCard();
+    this.context.removeCard(this.props.id);
   };
 
   renderCard = () => {
     return this.props.isAdmin ? (
-      <div>
+      <div className={s.card}>
         <h3>Name: {this.props.name}</h3>
         <p>id: {this.props.id}</p>
         <p>Price: {this.props.price}$</p>
         <p>Quantity: {this.props.quantity}</p>
         <p>Status: {this.props.status}</p>
-        {this.renderImage()}
-        <Link to={`/edit${this.props.id}`}>
+        <div>{this.renderImage()}</div>
+        <Link to={`/admin/edit/${this.props.id}`}>
           <button type="button" className={`btn btn-warning ${s.btn}`}>
             Edit Product
           </button>
@@ -41,11 +41,13 @@ export class Card extends React.Component {
         </button>
       </div>
     ) : (
-      <div>
-        <h3>{this.props.name}</h3>
-        <p>{this.props.price}$</p>
-        <img src={this.props.url} />
-      </div>
+      <Link to={`/product/${this.props.id}`}>
+        <div className={s.card}>
+          <h3>{this.props.name}</h3>
+          <p>{this.props.price}$</p>
+          <img src={this.props.url} />
+        </div>
+      </Link>
     );
   };
 

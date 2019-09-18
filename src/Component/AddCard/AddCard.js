@@ -15,7 +15,7 @@ export class AddCard extends React.Component {
 
   handleClick = () => {
     let value = {
-      id: this.refId.current.value,
+      id: parseInt(this.refId.current.value),
       name: this.refName.current.value,
       price: this.refPrice.current.value,
       quantity: this.refQuantity.current.value,
@@ -50,7 +50,7 @@ export class AddCard extends React.Component {
             />
             <label>Url Image Product:</label>
             <input className="form-control" type="text" ref={this.refUrl} />
-            <label>Status Product:</label>
+            <label className={s.status}>Status Product:</label>
             <select ref={this.refStock}>
               <option>in Stock</option>
               <option>NOT in Stock</option>

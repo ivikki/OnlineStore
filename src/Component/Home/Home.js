@@ -22,7 +22,7 @@ export class Home extends React.Component {
         ))}
       </div>
     ) : (
-      <div className="h3">Is empty</div>
+      <div className="h3">No Products. Is empty</div>
     );
   };
 

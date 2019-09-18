@@ -24,7 +24,7 @@ export class Admin extends React.Component {
         ))}
       </div>
     ) : (
-      <div className="h3">Is empty</div>
+      <div className="h3">No Products. Is empty</div>
     );
   };
 
@@ -32,7 +32,7 @@ export class Admin extends React.Component {
     return (
       <div className={s.wrapper}>
         <h2 className="display-4">Product List</h2>
-        <Link to={"/add"}>
+        <Link to={"/admin/add"}>
           <button type="button" className={`btn btn-lg btn-success ${s.btn}`}>
             Add Product
           </button>
