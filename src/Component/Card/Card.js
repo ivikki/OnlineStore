@@ -1,7 +1,8 @@
 import React from "react";
-import s from "./Card.module.css";
 import { Link } from "react-router-dom";
 import { AppContext } from "../../Context";
+import PropTypes from "prop-types";
+import s from "./Card.module.css";
 
 export class Card extends React.Component {
   static contextType = AppContext;
@@ -55,3 +56,13 @@ export class Card extends React.Component {
     return <div className={s.wrapper}>{this.renderCard()}</div>;
   }
 }
+
+Card.propTypes = {
+  name: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  url: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  quantity: PropTypes.number,
+  status: PropTypes.string,
+  isAdmin: PropTypes.bool
+};
