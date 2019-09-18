@@ -17,7 +17,7 @@ export class App extends React.Component {
         url:
           "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone8-select-2019-family?wid=882&amp;hei=1058&amp;fmt=jpeg&amp;qlt=80&amp;op_usm=0.5,0.5&amp;.v=1550795431127",
         quantity: 25,
-        status: "in Stock"
+        status: "NOT in Stock"
       },
       {
         id: 222,
@@ -36,6 +36,14 @@ export class App extends React.Component {
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpQZw9-IAQ1F7FlzljFsh2nJfQzQkFMk47YjCEwRE5Vzq7OVUv",
         quantity: 153,
         status: "in Stock"
+      },
+      {
+        id: 444,
+        name: "Xiomi",
+        price: 250,
+        url: "https://img.mvideo.ru/Pdb/30043457b.jpg",
+        quantity: 0,
+        status: "NOT in Stock"
       }
     ]
   };
