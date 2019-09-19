@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { AppContext } from "../../Context";
 import PropTypes from "prop-types";
+import { Button } from "../Button";
 import s from "./Card.module.css";
 
 export class Card extends React.Component {
@@ -29,17 +30,11 @@ export class Card extends React.Component {
         <p>Status: {this.props.status}</p>
         <div>{this.renderImage()}</div>
         <Link to={`/admin/edit/${this.props.id}`}>
-          <button type="button" className={`btn btn-warning ${s.btn}`}>
-            Edit Product
-          </button>
+          <Button className={`btn-warning ${s.btn}`}>Edit Product</Button>
         </Link>
-        <button
-          type="button"
-          className={`btn btn-danger ${s.btn}`}
-          onClick={this.removeCard}
-        >
+        <Button className={`btn-danger ${s.btn}`} fnClick={this.removeCard}>
           Remove Product
-        </button>
+        </Button>
       </div>
     ) : (
       <Link to={`/product/${this.props.id}`}>

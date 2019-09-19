@@ -1,6 +1,7 @@
 import React from "react";
 import { AppContext } from "../../Context";
 import { Link } from "react-router-dom";
+import { Button } from "../Button";
 import img from "./stock.png";
 import s from "./Product.module.css";
 
@@ -39,9 +40,7 @@ export class Product extends React.Component {
     return (
       <div className={s.wrapper}>
         <Link to="/">
-          <button type="button" className={`btn btn-lg btn-warning ${s.btn}`}>
-            Close
-          </button>
+          <Button className={`btn-lg btn-warning ${s.btn}`}>Close</Button>
         </Link>
         <div className={s.product}>
           <div className={s.about}>

@@ -1,7 +1,8 @@
 import React from "react";
-import s from "./AddCard.module.css";
 import { Link } from "react-router-dom";
+import { Button } from "../Button";
 import { AppContext } from "../../Context";
+import s from "./AddCard.module.css";
 
 export class AddCard extends React.Component {
   static contextType = AppContext;
@@ -15,7 +16,7 @@ export class AddCard extends React.Component {
 
   handleClick = () => {
     let value = {
-      id: parseInt(this.refId.current.value),
+      id: parseInt(this.refId.current.value) || +new Date(),
       name: this.refName.current.value,
       price: this.refPrice.current.value,
       quantity: this.refQuantity.current.value,
@@ -58,17 +59,15 @@ export class AddCard extends React.Component {
           </form>
           <div className={s.buttons}>
             <Link to={"/admin"}>
-              <button
-                className={"btn btn-primary " + s.button}
-                onClick={this.handleClick}
+              <Button
+                className={`btn-primary ${s.button}`}
+                fnClick={this.handleClick}
               >
                 Save
-              </button>
+              </Button>
             </Link>
             <Link to={"/admin"}>
-              <button className={"btn btn-secondary " + s.button}>
-                Cancel
-              </button>
+              <Button className={`btn-secondary ${s.button}`}>Cancel</Button>
             </Link>
           </div>
         </div>

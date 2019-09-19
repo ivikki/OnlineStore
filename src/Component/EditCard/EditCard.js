@@ -1,7 +1,8 @@
 import React from "react";
-import s from "./EditCard.module.css";
 import { Link } from "react-router-dom";
 import { AppContext } from "../../Context";
+import { Button } from "../Button";
+import s from "./EditCard.module.css";
 
 export class EditCard extends React.Component {
   state = {};
@@ -97,17 +98,15 @@ export class EditCard extends React.Component {
           </form>
           <div className={s.buttons}>
             <Link to={"/admin"}>
-              <button
-                className={"btn btn-success " + s.button}
-                onClick={this.editClick}
+              <Button
+                className={`btn-success + ${s.button}`}
+                fnClick={this.editClick}
               >
                 Save
-              </button>
+              </Button>
             </Link>
             <Link to={"/admin"}>
-              <button className={"btn btn-secondary " + s.button}>
-                Cancel
-              </button>
+              <Button className={`btn-secondary ${s.button}`}>Cancel</Button>
             </Link>
           </div>
         </div>
