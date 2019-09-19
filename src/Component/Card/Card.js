@@ -61,7 +61,7 @@ Card.propTypes = {
   name: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   url: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.any.isRequired,
   quantity: PropTypes.number,
   status: PropTypes.string,
   isAdmin: PropTypes.bool

@@ -72,14 +72,13 @@ export class App extends React.Component {
   };
 
   editCard = product => {
-    let products = this.state.products.slice();
-    for (let i = 0; i < products.length; i++) {
-      if (products[i].id === product.id) {
-        var index = i;
+    let products = this.state.products.map(el => {
+      if (el.id !== product.id) {
+        return el;
+      } else {
+        return product;
       }
-    }
-
-    products.splice(index, 1, product);
+    });
 
     this.setState({
       products
