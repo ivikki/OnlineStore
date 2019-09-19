@@ -3,45 +3,44 @@ import { Link } from "react-router-dom";
 import { AppContext } from "../../Context";
 import PropTypes from "prop-types";
 import { Button } from "../Button";
+import img from "./no-image-300x450.jpg";
 import s from "./Card.module.css";
 
 export class Card extends React.Component {
   static contextType = AppContext;
 
   renderImage = () => {
-    return this.props.url ? (
-      <img src={this.props.url} />
-    ) : (
-      <img src="http://www.vespogonag.ru/wp-content/uploads/2017/06/no-image-300x450.jpg" />
-    );
+    const { product } = this.props;
+    return product.url ? <img src={product.url} /> : <img src={img} />;
   };
 
   removeCard = () => {
-    this.context.removeCard(this.props.id);
+    this.context.removeCard(this.props.product.id);
   };
 
   renderCard = () => {
-    return this.props.isAdmin ? (
+    const { product, isAdmin } = this.props;
+    return isAdmin ? (
       <div className={s.card}>
-        <h3>Name: {this.props.name}</h3>
-        <p>id: {this.props.id}</p>
-        <p>Price: {this.props.price}$</p>
-        <p>Quantity: {this.props.quantity}</p>
-        <p>Status: {this.props.status}</p>
+        <h3>Name: {product.name}</h3>
+        <p>id: {product.id}</p>
+        <p>Price: {product.price}$</p>
+        <p>Quantity: {product.quantity}</p>
+        <p>Status: {product.status}</p>
         <div>{this.renderImage()}</div>
-        <Link to={`/admin/edit/${this.props.id}`}>
+        <Link to={`/admin/edit/${product.id}`}>
           <Button className={`btn-warning ${s.btn}`}>Edit Product</Button>
         </Link>
-        <Button className={`btn-danger ${s.btn}`} fnClick={this.removeCard}>
+        <Button className={`btn-danger ${s.btn}`} onClick={this.removeCard}>
           Remove Product
         </Button>
       </div>
     ) : (
-      <Link to={`/product/${this.props.id}`}>
+      <Link to={`/product/${product.id}`}>
         <div className={s.card}>
-          <h3>{this.props.name}</h3>
-          <p>{this.props.price}$</p>
-          <img src={this.props.url} />
+          <h3>{product.name}</h3>
+          <p>{product.price}$</p>
+          <img src={product.url} />
         </div>
       </Link>
     );
@@ -53,11 +52,6 @@ export class Card extends React.Component {
 }
 
 Card.propTypes = {
-  name: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  url: PropTypes.string.isRequired,
-  id: PropTypes.any.isRequired,
-  quantity: PropTypes.number,
-  status: PropTypes.string,
+  product: PropTypes.object.isRequired,
   isAdmin: PropTypes.bool
 };

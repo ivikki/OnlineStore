@@ -31,7 +31,7 @@ export class Home extends React.Component {
     return (
       <div className={s.wrapper}>
         <h2 className="display-4">Product List</h2>
-        <Link to={"/admin"}>
+        <Link to="/admin">
           <Button className={`btn-secondary btn-lg active ${s.btn}`}>
             Admin
           </Button>

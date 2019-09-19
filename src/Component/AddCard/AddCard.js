@@ -14,7 +14,7 @@ export class AddCard extends React.Component {
   refUrl = React.createRef();
   refStock = React.createRef();
 
-  handleClick = () => {
+  handleClick = e => {
     let value = {
       id: parseInt(this.refId.current.value) || +new Date(),
       name: this.refName.current.value,
@@ -23,7 +23,9 @@ export class AddCard extends React.Component {
       url: this.refUrl.current.value,
       status: this.refStock.current.value
     };
-    this.context.addCard(value);
+    if (!this.context.addCard(value)) {
+      e.preventDefault();
+    }
   };
 
   render() {
@@ -61,7 +63,7 @@ export class AddCard extends React.Component {
             <Link to={"/admin"}>
               <Button
                 className={`btn-primary ${s.button}`}
-                fnClick={this.handleClick}
+                onClick={this.handleClick}
               >
                 Save
               </Button>

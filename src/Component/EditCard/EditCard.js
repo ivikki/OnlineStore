@@ -100,7 +100,7 @@ export class EditCard extends React.Component {
             <Link to={"/admin"}>
               <Button
                 className={`btn-success + ${s.button}`}
-                fnClick={this.editClick}
+                onClick={this.editClick}
               >
                 Save
               </Button>

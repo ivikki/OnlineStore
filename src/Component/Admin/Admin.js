@@ -11,16 +11,7 @@ export class Admin extends React.Component {
     return this.context.products.length > 0 ? (
       <div className={s["wrapper-card"]}>
         {this.context.products.map(el => (
-          <Card
-            key={el.id}
-            name={el.name}
-            price={el.price}
-            url={el.url}
-            id={el.id}
-            quantity={el.quantity}
-            status={el.status}
-            isAdmin={true}
-          />
+          <Card product={el} key={el.id} isAdmin={true} />
         ))}
       </div>
     ) : (
@@ -32,7 +23,7 @@ export class Admin extends React.Component {
     return (
       <div className={s.wrapper}>
         <h2 className="display-4">Product List</h2>
-        <Link to={"/admin/add"}>
+        <Link to="/admin/add">
           <button type="button" className={`btn btn-lg btn-success ${s.btn}`}>
             Add Product
           </button>

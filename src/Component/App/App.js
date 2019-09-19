@@ -50,19 +50,19 @@ export class App extends React.Component {
   };
 
   addCard = product => {
-    let products = this.state.products.slice();
     let element = this.state.products.find(el => el.id === product.id);
     if (!element) {
+      let products = this.state.products.slice();
       products.push(product);
-    } else {
-      alert(
-        "It is not possible to add a product. \nProduct with that ID already exists"
-      );
+      this.setState({
+        products
+      });
+      return true;
     }
-
-    this.setState({
-      products
-    });
+    alert(
+      "It is not possible to add a product. \nProduct with that ID already exists"
+    );
+    return false;
   };
 
   removeCard = id => {
@@ -76,9 +76,8 @@ export class App extends React.Component {
     let products = this.state.products.map(el => {
       if (el.id !== product.id) {
         return el;
-      } else {
-        return product;
       }
+      return product;
     });
 
     this.setState({
@@ -99,7 +98,6 @@ export class App extends React.Component {
         <Router>
           <Route path="/" exact component={Home} />
           <Route path="/admin" component={Admin} />
-          {console.log(this.state.products)}
           <Route path="/admin/add" component={AddCard} />
           <Route path="/admin/edit/:id" component={EditCard} />
           <Route path="/product/:id" component={Product} />
