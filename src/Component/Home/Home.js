@@ -4,28 +4,10 @@ import { AppContext } from "../../Context";
 import { Card } from "../Card";
 import { Button } from "../Button";
 import s from "./Home.module.css";
+import { ProductList } from "../ProductList";
 
 export class Home extends React.Component {
   static contextType = AppContext;
-
-  renderCard = () => {
-    return this.context.products.length > 0 ? (
-      <div className={s["wrapper-card"]}>
-        {this.context.products.map(el => (
-          <Card
-            key={el.id}
-            name={el.name}
-            price={el.price}
-            url={el.url}
-            id={el.id}
-            isAdmin={false}
-          />
-        ))}
-      </div>
-    ) : (
-      <div className="h3">No Products. Is empty</div>
-    );
-  };
 
   render() {
     return (
@@ -36,7 +18,7 @@ export class Home extends React.Component {
             Admin
           </Button>
         </Link>
-        {this.renderCard()}
+        <ProductList isAdmin={false} />
       </div>
     );
   }

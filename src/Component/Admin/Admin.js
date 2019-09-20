@@ -3,21 +3,10 @@ import { Link } from "react-router-dom";
 import { Card } from "../Card";
 import { AppContext } from "../../Context";
 import s from "./Admin.module.css";
+import { ProductList } from "../ProductList";
 
 export class Admin extends React.Component {
   static contextType = AppContext;
-
-  renderCard = () => {
-    return this.context.products.length > 0 ? (
-      <div className={s["wrapper-card"]}>
-        {this.context.products.map(el => (
-          <Card product={el} key={el.id} isAdmin={true} />
-        ))}
-      </div>
-    ) : (
-      <div className="h3">No Products. Is empty</div>
-    );
-  };
 
   render() {
     return (
@@ -28,7 +17,7 @@ export class Admin extends React.Component {
             Add Product
           </button>
         </Link>
-        {this.renderCard()}
+        <ProductList isAdmin={true} />
       </div>
     );
   }
