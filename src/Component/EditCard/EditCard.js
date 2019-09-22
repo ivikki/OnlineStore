@@ -3,49 +3,41 @@ import { Link } from "react-router-dom";
 import { AppContext } from "../../Context";
 import { Button } from "../Button";
 import s from "./EditCard.module.css";
+import { API } from "../../API";
 
 export class EditCard extends React.Component {
-  state = {};
   static contextType = AppContext;
 
-  refName = React.createRef();
-  refPrice = React.createRef();
-  refQuantity = React.createRef();
-  refUrl = React.createRef();
-  refStock = React.createRef();
-
-  componentDidMount() {
-    const id = parseInt(this.props.match.params.id);
-    let product = this.context.products.find(el => el.id === id);
-    this.setState({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      url: product.url,
-      quantity: product.quantity,
-      status: product.status
-    });
-  }
-
-  editClick = () => {
-    let value = {
-      id: this.state.id,
-      name: this.refName.current.value,
-      price: this.refPrice.current.value,
-      quantity: this.refQuantity.current.value,
-      url: this.refUrl.current.value,
-      status: this.refStock.current.value
-    };
-    this.context.editCard(value);
+  state = {
+    product: []
   };
 
-  changeValue = () => {
+  componentDidMount() {
+    const id = this.props.match.params.id;
+    API.getProduct(id).then(res =>
+      this.setState({
+        product: res
+      })
+    );
+  }
+
+  editProduct = () => {
+    let product = {
+      id: this.state.product.id,
+      title: this.state.product.title,
+      price: parseInt(this.state.product.price),
+      quantity: parseInt(this.state.product.quantity),
+      image: this.state.product.image,
+      inStock: this.state.product.inStock === "true"
+    };
+    this.context.editCard(product);
+  };
+
+  changeValue = e => {
+    let product = { ...this.state.product };
+    product[e.target.name] = e.target.value;
     this.setState({
-      name: this.refName.current.value,
-      price: this.refPrice.current.value,
-      url: this.refUrl.current.value,
-      quantity: this.refQuantity.current.value,
-      status: this.refStock.current.value
+      product
     });
   };
 
@@ -56,30 +48,33 @@ export class EditCard extends React.Component {
           <h2 className="text-center">Edit Product</h2>
           <form>
             <label>
-              <mark>id: {this.state.id}</mark>
+              <mark>id: {this.state.product.id}</mark>
             </label>
             <label>Name Product:</label>
             <input
               className="form-control"
               type="text"
-              ref={this.refName}
-              value={this.state.name}
+              name="title"
+              ref={this.refTitle}
+              value={this.state.product.title}
               onChange={this.changeValue}
             />
             <label>Price Product:</label>
             <input
               className="form-control"
               type="number"
+              name="price"
               ref={this.refPrice}
-              value={this.state.price}
+              value={this.state.product.price}
               onChange={this.changeValue}
             />
             <label>Quantity Product:</label>
             <input
               className="form-control"
               type="number"
+              name="quantity"
               ref={this.refQuantity}
-              value={this.state.quantity}
+              value={this.state.product.quantity}
               onChange={this.changeValue}
             />
             <label>Url Image Product:</label>
@@ -87,20 +82,26 @@ export class EditCard extends React.Component {
               className="form-control"
               type="text"
               ref={this.refUrl}
-              value={this.state.url}
+              name="image"
+              value={this.state.product.image}
               onChange={this.changeValue}
             />
             <label className={s.status}>Status Product:</label>
-            <select ref={this.refStock}>
-              <option>in Stock</option>
-              <option>NOT in Stock</option>
+            <select
+              ref={this.refStock}
+              value={this.state.product.inStock}
+              name="inStock"
+              onChange={this.changeValue}
+            >
+              <option value={true}>in Stock</option>
+              <option value={false}>NOT in Stock</option>
             </select>
           </form>
           <div className={s.buttons}>
             <Link to={"/admin"}>
               <Button
                 className={`btn-success + ${s.button}`}
-                onClick={this.editClick}
+                onClick={this.editProduct}
               >
                 Save
               </Button>

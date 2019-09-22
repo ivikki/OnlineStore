@@ -1,13 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Card } from "../Card";
-import { AppContext } from "../../Context";
 import s from "./Admin.module.css";
 import { ProductList } from "../ProductList";
 
 export class Admin extends React.Component {
-  static contextType = AppContext;
-
   render() {
     return (
       <div className={s.wrapper}>

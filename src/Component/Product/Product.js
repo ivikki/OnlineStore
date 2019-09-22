@@ -1,37 +1,41 @@
 import React from "react";
-import { AppContext } from "../../Context";
 import { Link } from "react-router-dom";
 import { Button } from "../Button";
 import img from "./stock.png";
 import s from "./Product.module.css";
+import { API } from "../../API";
 
 export class Product extends React.Component {
-  static contextType = AppContext;
-
-  state = {};
+  state = {
+    product: []
+  };
 
   componentDidMount() {
-    const id = parseInt(this.props.match.params.id);
-    let product = this.context.products.find(el => el.id === id);
-    this.setState({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      url: product.url,
-      quantity: product.quantity,
-      status: product.status
-    });
+    const id = this.props.match.params.id;
+    API.getProduct(id).then(res =>
+      this.setState({
+        product: res.body
+      })
+    );
   }
 
   renderImage = () => {
-    return this.state.status === "in Stock" ? (
+    return this.state.product.inStock ? (
       <div className={s.image}>
-        <img className={s.img} src={this.state.url} alt={this.state.name} />
+        <img
+          className={s.img}
+          src={this.state.product.image}
+          alt={this.state.product.title}
+        />
       </div>
     ) : (
       <div className={s.image}>
         <img className={s.stock} src={img} />
-        <img className={s.img} src={this.state.url} alt={this.state.name} />
+        <img
+          className={s.img}
+          src={this.state.product.image}
+          alt={this.state.product.title}
+        />
       </div>
     );
   };
@@ -42,12 +46,13 @@ export class Product extends React.Component {
         <Link to="/">
           <Button className={`btn-lg btn-warning ${s.btn}`}>Close</Button>
         </Link>
+        {console.log("product", this.state.product)}
         <div className={s.product}>
           <div className={s.about}>
-            <mark>id: {this.state.id}</mark>
-            <p>Name: {this.state.name}</p>
-            <p>Price: {this.state.price}$</p>
-            <p>Quantity: {this.state.quantity}</p>
+            <mark>id: {this.state.product.id}</mark>
+            <p>Name: {this.state.product.title}</p>
+            <p>Price: {this.state.product.price}$</p>
+            <p>Quantity: {this.state.product.quantity}</p>
           </div>
           {this.renderImage()}
         </div>

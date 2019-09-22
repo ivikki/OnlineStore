@@ -1,14 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { AppContext } from "../../Context";
-import { Card } from "../Card";
 import { Button } from "../Button";
 import s from "./Home.module.css";
 import { ProductList } from "../ProductList";
 
 export class Home extends React.Component {
-  static contextType = AppContext;
-
   render() {
     return (
       <div className={s.wrapper}>
