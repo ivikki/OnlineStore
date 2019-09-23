@@ -45,10 +45,10 @@ export class AddCard extends React.Component {
 
   async addCard(product) {
     let res = await API.addProduct(product);
-    if (res.status !== 200) {
-      return false;
+    if (res) {
+      return true;
     }
-    return true;
+    return false;
   }
 
   render() {

@@ -20,11 +20,27 @@ export class ProductList extends React.Component {
     });
   }
 
+  deleteCallback = id => {
+    let products = this.state.products.filter(el => {
+      if (el.id !== id) {
+        return el;
+      }
+    });
+    this.setState({
+      products
+    });
+  };
+
   renderCards = () => {
     return this.state.products.length > 0 ? (
       <div className={s["wrapper-card"]}>
         {this.state.products.map(el => (
-          <Card product={el} key={el.id} isAdmin={this.props.isAdmin} />
+          <Card
+            product={el}
+            key={el.id}
+            deleteCallback={this.deleteCallback}
+            isAdmin={this.props.isAdmin}
+          />
         ))}
       </div>
     ) : (

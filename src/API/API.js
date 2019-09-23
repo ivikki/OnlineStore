@@ -55,6 +55,17 @@ class APIRequest {
     });
     return response;
   }
+
+  async editProduct(id, product) {
+    let response = await fetch(API_BASE + "/product/" + id, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8"
+      },
+      body: JSON.stringify(product)
+    });
+    return response;
+  }
 }
 
 export const API = new APIRequest();

@@ -18,6 +18,7 @@ export class Card extends React.Component {
         alert("Failure. Product not removed");
       } else {
         alert("Product removed");
+        this.props.deleteCallback(this.props.product.id);
       }
     });
   };
