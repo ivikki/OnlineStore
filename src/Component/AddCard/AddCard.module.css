@@ -41,3 +41,7 @@
     display: inline-block;
     margin: 20px 10px 20px 5px;
 }
+
+span{
+    display: block;
+}
