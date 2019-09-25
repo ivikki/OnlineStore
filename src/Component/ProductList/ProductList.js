@@ -43,11 +43,16 @@ export class ProductList extends React.Component {
         alert("server error");
       } else {
         this.setState({
-          products: res.body.content
+          products: res.body.content,
+          pageNumber: res.body.pageNumber
         });
       }
     });
   };
+
+  getClassName(num) {
+    return this.state.pageNumber === num ? s.page + " " + s.active : s.page;
+  }
 
   renderPagesNumber = () => {
     if (this.state.totalPages > 1) {
@@ -60,7 +65,7 @@ export class ProductList extends React.Component {
           {pages.map(el => (
             <li
               key={el}
-              className={s.page}
+              className={this.getClassName(el - 1)}
               onClick={() => this.changePage(el - 1)}
             >
               {el}

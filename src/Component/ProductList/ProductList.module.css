@@ -39,3 +39,7 @@
     color: cornflowerblue;
 }
 
+.active:hover{
+    border: none;
+}
+
