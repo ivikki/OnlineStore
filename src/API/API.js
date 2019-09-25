@@ -1,8 +1,17 @@
 const API_BASE = process.env.REACT_APP_API_BASE;
 
 class APIRequest {
-  async getProducts() {
-    let response = await fetch(API_BASE + "/product/list");
+  async getProducts({ size, page } = {}) {
+    let url = API_BASE + "/product/list?";
+    if (size) {
+      url += "size=" + size;
+    }
+
+    if (page) {
+      url += "&page=" + page;
+    }
+
+    let response = await fetch(url);
 
     let body = {};
     try {
@@ -11,7 +20,7 @@ class APIRequest {
 
     return {
       status: response.status,
-      body: body.content
+      body: body
     };
   }
 
@@ -64,7 +73,16 @@ class APIRequest {
       },
       body: JSON.stringify(product)
     });
-    return response;
+
+    let body = {};
+    try {
+      body = await response.json();
+    } catch (e) {}
+
+    return {
+      status: response.status,
+      body: body
+    };
   }
 }
 

@@ -23,6 +23,7 @@
 }
 
 .image{
+    width: 350px;
     border: 1px solid black;
     padding: 20px;
     background-color: white;
@@ -38,8 +39,6 @@
 .img{
     margin: 0 auto;
     display: block;
-    height: 300px;
-    max-width: 80%;
 }
 
 .stock{

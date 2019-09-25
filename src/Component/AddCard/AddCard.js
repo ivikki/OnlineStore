@@ -37,21 +37,17 @@ export class AddCard extends React.Component {
     });
   };
 
-  renderRedirect = () => {
-    if (this.state.redirect) {
-      return <Redirect to="/admin" />;
-    }
-  };
-
   async addCard(product) {
     let res = await API.addProduct(product);
-    if (res) {
-      return true;
-    }
-    return false;
+
+    return res.status === 200;
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to="/admin" />;
+    }
+
     return (
       <div className={s.wrapper}>
         <div className={s.modal}>
@@ -76,7 +72,6 @@ export class AddCard extends React.Component {
             </select>
           </form>
           <div className={s.buttons}>
-            {this.renderRedirect()}
             <Button
               className={`btn-primary ${s.button}`}
               onClick={this.handleClick}
